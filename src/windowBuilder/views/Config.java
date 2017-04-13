@@ -2,8 +2,8 @@ package windowBuilder.views;
 
 public interface Config {
 
-	 	public static final int BOARD_WIDTH = 458;
-	    public static final int BOARD_HEIGHT = 450;
+	 	public static final int SPACE_WIDTH = 458;
+	    public static final int SPACE_HEIGHT = 450;
 	    public static final int GROUND = 320;
 	    public static final int BOMB_HEIGHT = 5;
 	    public static final int INVADER_HEIGHT = 20;

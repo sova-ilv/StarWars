@@ -1,16 +1,22 @@
+/*
+ * SpaceInvader.java
+ * - Version 4/13/2017 compiles and actually run with basic features. (JV)
+ * 
+ * Here are the wish list on my initial requirements
+ * 1. Restart button 
+ * 2. Stats status => how many lives left, how many enemies left
+ * 3. colors are boring, please update
+ * 4. Icons are boring, please update
+ * 5. Config may not be enough.
+ * 
+ * */
+
+
 package windowBuilder.views;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JRadioButton;
-import java.awt.Color;
 import javax.swing.UIManager;
-import javax.swing.JTextField;
-import java.awt.Font;
 import java.awt.SystemColor;
 
 public class SpaceInvaders extends JFrame implements Config{
@@ -19,7 +25,7 @@ public class SpaceInvaders extends JFrame implements Config{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtLifeLeft;
+
 
 	/**
 	 * Launch the application.
@@ -62,12 +68,8 @@ public class SpaceInvaders extends JFrame implements Config{
 		Space space = new Space();
 		space.setBackground(SystemColor.desktop);
 		getContentPane().add(space);
-		
-		
-
-        setTitle("Space Invaders");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(BOARD_WIDTH, BOARD_HEIGHT);
+        setSize(SPACE_WIDTH, SPACE_HEIGHT);
         setLocationRelativeTo(null);
         setResizable(false);
         

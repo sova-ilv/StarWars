@@ -51,7 +51,7 @@ public class Space extends JPanel implements Runnable, Config {
 
         addKeyListener(new TAdapter());
         setFocusable(true);
-        d = new Dimension(BOARD_WIDTH, BOARD_HEIGHT);
+        d = new Dimension(SPACE_WIDTH, SPACE_HEIGHT);
         setBackground(Color.white);
 
         gameInit();
@@ -149,7 +149,7 @@ public class Space extends JPanel implements Runnable, Config {
 
         if (ingame) {
 
-            g.drawLine(0, GROUND, BOARD_WIDTH, GROUND);
+            g.drawLine(0, GROUND, SPACE_WIDTH, GROUND);
             drawInvaders(g);
             drawPlayer(g);
             drawShot(g);
@@ -165,39 +165,40 @@ public class Space extends JPanel implements Runnable, Config {
         Graphics g = this.getGraphics();
 
         g.setColor(Color.white);
-        g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+        g.fillRect(0, 0, SPACE_WIDTH, SPACE_HEIGHT);
 
         g.setColor(new Color(0, 32, 48));
-        g.fillRect(50, BOARD_WIDTH / 2 - 30, BOARD_WIDTH - 100, 50);
+        g.fillRect(50, SPACE_WIDTH / 2 - 30, SPACE_WIDTH - 100, 50);
         g.setColor(Color.white);
-        g.drawRect(50, BOARD_WIDTH / 2 - 30, BOARD_WIDTH - 100, 50);
+        g.drawRect(50, SPACE_WIDTH / 2 - 30, SPACE_WIDTH - 100, 50);
 
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = this.getFontMetrics(small);
 
         g.setColor(Color.white);
         g.setFont(small);
-        g.drawString(message, (BOARD_WIDTH - metr.stringWidth(message)) / 2,
-                BOARD_WIDTH / 2);
+        g.drawString(message, (SPACE_WIDTH - metr.stringWidth(message)) / 2,
+                SPACE_WIDTH / 2);
     }
 
+    //working on this one, fixme, (JV)
     public void updateStat() {
     	 Graphics g2 = this.getGraphics();
     	 g2.setColor(Color.white);
-         g2.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+         g2.fillRect(0, 0, SPACE_WIDTH, SPACE_HEIGHT);
 
          g2.setColor(new Color(0, 32, 48));
-         g2.fillRect(50, BOARD_WIDTH / 2 - 30, BOARD_WIDTH - 100, 50);
+         g2.fillRect(50, SPACE_WIDTH / 2 - 30, SPACE_WIDTH - 100, 50);
          g2.setColor(Color.white);
-         g2.drawRect(50, BOARD_WIDTH / 2 - 30, BOARD_WIDTH - 100, 50);
+         g2.drawRect(50, SPACE_WIDTH / 2 - 30, SPACE_WIDTH - 100, 50);
 
          Font small = new Font("Helvetica", Font.BOLD, 14);
          FontMetrics metr = this.getFontMetrics(small);
 
          g2.setColor(Color.white);
          g2.setFont(small);
-         g2.drawString("Life Left: xx ", (BOARD_WIDTH - metr.stringWidth(message)) / 2,
-                 BOARD_WIDTH / 2);
+         g2.drawString("Life Left: xx ", (SPACE_WIDTH - metr.stringWidth(message)) / 2,
+                 SPACE_WIDTH / 2);
     }
     public void animationCycle() {
 
@@ -252,7 +253,7 @@ public class Space extends JPanel implements Runnable, Config {
 
             int x = Invader.getX();
 
-            if (x >= BOARD_WIDTH - BORDER_RIGHT && direction != -1) {
+            if (x >= SPACE_WIDTH - BORDER_RIGHT && direction != -1) {
 
                 direction = -1;
                 Iterator<Invader> i1 = invaders.iterator();
@@ -293,7 +294,7 @@ public class Space extends JPanel implements Runnable, Config {
                     message = "Invasion!";
                 }
 
-                Invader.act(direction);
+                Invader.move(direction);
             }
         }
 

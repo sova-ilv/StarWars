@@ -27,7 +27,7 @@ public class Player extends Sprite implements Config {
         setY(START_Y);
     }
 
-    //x and y are instance vars inherited from Sprite.
+    //x and y are instance variables inherited from Sprite.
     public void act() {
         
         x += dx;
@@ -36,8 +36,8 @@ public class Player extends Sprite implements Config {
             x = 2;
         }
         
-        if (x >= BOARD_WIDTH - 2 * width) {
-            x = BOARD_WIDTH - 2 * width;
+        if (x >= SPACE_WIDTH - 2 * width) {
+            x = SPACE_WIDTH - 2 * width;
         }
     }
 

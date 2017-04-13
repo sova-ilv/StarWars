@@ -21,7 +21,7 @@ public class Invader extends Sprite {
         setImage(ii.getImage());
     }
 
-    public void act(int direction) {
+    public void move(int direction) {
         
         this.x += direction;
     }
