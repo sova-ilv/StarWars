@@ -1,6 +1,8 @@
 /*
  * SpaceInvader.java
- * - Version 4/13/2017 compiles and actually run with basic features. (JV)
+ * - Version 4/13/2017 - compiles and actually run with basic features. (JV)
+ * - Version 4/21/2017 - Added Menubar to contain upcoming features.
+ *                     - Completed the game restart feature.
  * 
  * Here are the wish list on my initial requirements
  * 1. Restart button - Done 4-21-17 
