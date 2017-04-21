@@ -28,7 +28,9 @@ public class Player extends Sprite implements Config {
     }
 
     //x and y are instance variables inherited from Sprite.
-    public void act() {
+    
+    //move is horizontal only using the left or right arrow keys    
+    public void move() {
         
         x += dx;
         

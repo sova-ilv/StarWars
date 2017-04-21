@@ -181,25 +181,7 @@ public class Space extends JPanel implements Runnable, Config {
                 SPACE_WIDTH / 2);
     }
 
-    //working on this one, fixme, (JV)
-    public void updateStat() {
-    	 Graphics g2 = this.getGraphics();
-    	 g2.setColor(Color.white);
-         g2.fillRect(0, 0, SPACE_WIDTH, SPACE_HEIGHT);
-
-         g2.setColor(new Color(0, 32, 48));
-         g2.fillRect(50, SPACE_WIDTH / 2 - 30, SPACE_WIDTH - 100, 50);
-         g2.setColor(Color.white);
-         g2.drawRect(50, SPACE_WIDTH / 2 - 30, SPACE_WIDTH - 100, 50);
-
-         Font small = new Font("Helvetica", Font.BOLD, 14);
-         FontMetrics metr = this.getFontMetrics(small);
-
-         g2.setColor(Color.white);
-         g2.setFont(small);
-         g2.drawString("Life Left: xx ", (SPACE_WIDTH - metr.stringWidth(message)) / 2,
-                 SPACE_WIDTH / 2);
-    }
+   
     public void animationCycle() {
 
         if (deaths == NUMBER_OF_ALIENS_TO_DESTROY) {
@@ -209,7 +191,7 @@ public class Space extends JPanel implements Runnable, Config {
         }
 
         // player
-        player.act();
+        player.move();
 
         // shot
         if (shot.isVisible()) {
