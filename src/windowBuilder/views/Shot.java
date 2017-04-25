@@ -1,10 +1,14 @@
 package windowBuilder.views;
 
-import javax.swing.ImageIcon;
+import java.awt.Image;
+
+
+import windowBuilder.resources.ResourceLoader;
 
 public class Shot extends Sprite {
 
-    private final String shotImg = "src/windowBuilder/resources/missile-weapon.png";
+    //private final String shotImg = "src/windowBuilder/resources/missile-weapon.png";
+	private final String shotImg = "missile-weapon.png";
     private final int H_SPACE = 6;
     private final int V_SPACE = 1;
 
@@ -18,8 +22,11 @@ public class Shot extends Sprite {
 
     private void initShot(int x, int y) {
 
-        ImageIcon ii = new ImageIcon(shotImg);
-        setImage(ii.getImage());
+        //ImageIcon ii = new ImageIcon(shotImg);
+        //setImage(ii.getImage());
+
+        Image ii = ResourceLoader.getImage(shotImg);
+        setImage(ii);
         
         setX(x + H_SPACE);
         setY(y - V_SPACE);

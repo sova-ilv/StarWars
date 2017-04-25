@@ -94,7 +94,7 @@ public class SpaceInvaders extends JFrame implements Config{
 		setContentPane(pContentPane);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //setSize(466, 450);
+        setSize(466, 450);
         setLocationRelativeTo(null);
         setResizable(true);
         
@@ -116,8 +116,7 @@ public class SpaceInvaders extends JFrame implements Config{
 		JMenuBar menuBar;
 		JMenu menu; //, submenu;
 		JMenuItem menuItem;
-		//JRadioButtonMenuItem rbMenuItem;
-		//JCheckBoxMenuItem cbMenuItem;
+		
 		 
 		//Create the menu bar.
 		menuBar = new JMenuBar();

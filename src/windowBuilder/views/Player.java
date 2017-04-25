@@ -1,14 +1,18 @@
 package windowBuilder.views;
 
+import java.awt.Image;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
+
+
+import windowBuilder.resources.ResourceLoader;
 
 public class Player extends Sprite implements Config {
 
     private final int START_Y = 280;
     private final int START_X = 270;
 
-    private final String playerImg = "src/windowBuilder/resources/player.png";
+    //private final String playerImg = "src/windowBuilder/resources/player.png";
+    private final String playerImg = "player.png";
     private int width;
 
     public Player() {
@@ -18,11 +22,14 @@ public class Player extends Sprite implements Config {
 
     private void initPlayer() {
         
-        ImageIcon ii = new ImageIcon(playerImg);
+        //ImageIcon ii = new ImageIcon(playerImg);
+        //width = ii.getImage().getWidth(null);
+        
+        Image ii = ResourceLoader.getImage(playerImg);
+        width = ii.getWidth(null);
+        setImage(ii);
 
-        width = ii.getImage().getWidth(null);
-
-        setImage(ii.getImage());
+        //setImage(ii.getImage());
         setX(START_X);
         setY(START_Y);
     }

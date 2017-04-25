@@ -7,6 +7,7 @@ public class Sprite {
 
 	    private boolean visible;
 	    private Image image;
+	    //private String image;
 	    protected int x;
 	    protected int y;
 	    protected boolean dying;
@@ -32,9 +33,9 @@ public class Sprite {
 	        this.visible = visible;
 	    }
 
-	    public void setImage(Image image) {
+	    public void setImage(Image image2) {
 	    
-	        this.image = image;
+	        this.image = image2;
 	    }
 
 	    public Image getImage() {

@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -17,8 +18,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
+
 import javax.swing.JPanel;
+
+import windowBuilder.resources.ResourceLoader;
 
 public class Space extends JPanel implements Runnable, Config {
 
@@ -37,7 +40,7 @@ public class Space extends JPanel implements Runnable, Config {
     private int deaths = 0;
 
     private boolean ingame = true;
-    private final String explImg = "src/windowBuilder/resources/explosion.png";
+    private final String explImg = "explode1.png";
     private String message = "You are dead!";
 
     private Thread animator;
@@ -209,9 +212,12 @@ public class Space extends JPanel implements Runnable, Config {
                             && shotX <= (InvaderX + INVADER_WIDTH)
                             && shotY >= (InvaderY)
                             && shotY <= (InvaderY + INVADER_HEIGHT)) {
-                        ImageIcon ii
-                                = new ImageIcon(explImg);
-                        invader.setImage(ii.getImage());
+                        //ImageIcon ii = new ImageIcon(explImg);
+                        //invader.setImage(ii.getImage());
+                        
+                        Image ii = ResourceLoader.getImage(explImg);        
+                    	invader.setImage(ii);
+                    	
                         invader.setDying(true);
                         deaths++;
                         shot.die();
@@ -306,9 +312,11 @@ public class Space extends JPanel implements Runnable, Config {
                         && bombX <= (playerX + PLAYER_WIDTH)
                         && bombY >= (playerY)
                         && bombY <= (playerY + PLAYER_HEIGHT)) {
-                    ImageIcon ii
-                            = new ImageIcon(explImg);
-                    player.setImage(ii.getImage());
+                    //ImageIcon ii = new ImageIcon(explImg);                	
+                    //player.setImage(ii.getImage());
+                	Image ii = ResourceLoader.getImage(explImg);        
+                	player.setImage(ii);
+                    
                     player.setDying(true);
                     b.setDestroyed(true);
                 }
