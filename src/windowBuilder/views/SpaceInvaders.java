@@ -84,7 +84,7 @@ public class SpaceInvaders extends JFrame implements Config{
 	 * This method all code for creating and initializing components
 	 * */
 	private void initComponents() {
-		setTitle("Space Invader");
+		setTitle("Star Wars Game");
 		        
 		setBounds(100, 100, 579, 539);
 		pContentPane = new JPanel();
@@ -142,7 +142,8 @@ public class SpaceInvaders extends JFrame implements Config{
 		}
 	
 	public void resetSpaceParams() {
-		pSpace.gameInit();
+		pSpace.initSpace();
+		
 	}
 
 	/*

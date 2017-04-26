@@ -40,7 +40,7 @@ public class Space extends JPanel implements Runnable, Config {
     private int deaths = 0;
 
     private boolean ingame = true;
-    private final String explImg = "explode1.png";
+    private final String explImg = "Explosion.jpeg";
     private String message = "You are dead!";
 
     private Thread animator;
@@ -50,17 +50,26 @@ public class Space extends JPanel implements Runnable, Config {
         initSpace();
     }
 
-    private void initSpace() {
+    public void initSpace() {
 
         addKeyListener(new TAdapter());
         setFocusable(true);
         d = new Dimension(SPACE_WIDTH, SPACE_HEIGHT);
         setBackground(Color.white);
 
+        resetGameVariables();
         gameInit();
         setDoubleBuffered(true);
     }
 
+    //To support game restart, we must reset game stats
+    public void resetGameVariables() {
+    	deaths = 0;
+    	ingame = true;
+    	direction = -1;
+    	animator=null;
+    }
+    
     @Override
     public void addNotify() {
 
@@ -363,6 +372,14 @@ public class Space extends JPanel implements Runnable, Config {
         }
 
         gameOver();
+        try {
+			animator.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        animator = null;
+        
     }
 
     private class TAdapter extends KeyAdapter {
