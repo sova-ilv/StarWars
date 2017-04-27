@@ -230,6 +230,10 @@ public class Space extends JPanel implements Runnable, Config {
                         invader.setDying(true);
                         deaths++;
                         shot.die();
+                        
+                        player.addScore();
+                        //SpaceInvaders.pframe.setTitle("Space Invader        Score:" + player.getScore());
+                        SpaceInvaders.pframe.setTitle("Star Wars Game        Score:0" + player.getScore());
                     }
                 }
             }

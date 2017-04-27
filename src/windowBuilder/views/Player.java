@@ -14,7 +14,8 @@ public class Player extends Sprite implements Config {
     //private final String playerImg = "src/windowBuilder/resources/player.png";
     private final String playerImg = "player.png";
     private int width;
-
+    int score = 0;
+    
     public Player() {
 
         initPlayer();
@@ -76,4 +77,13 @@ public class Player extends Sprite implements Config {
             dx = 0;
         }
     }
+    public int getScore(){
+            return score;
+    	 }
+    public void addScore(){
+    	        score++;
+    	 }
+    public void setScore(int i){
+            score = i;
+    		    }
 }
