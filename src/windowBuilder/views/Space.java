@@ -40,7 +40,7 @@ public class Space extends JPanel implements Runnable, Config {
     private int deaths = 0;
 
     private boolean ingame = true;
-    private final String explImg = "Explosion.jpeg";
+    private final String explImg = "explode1.png";
     private String message = "You are dead!";
 
     private Thread animator;
@@ -50,26 +50,17 @@ public class Space extends JPanel implements Runnable, Config {
         initSpace();
     }
 
-    public void initSpace() {
+    private void initSpace() {
 
         addKeyListener(new TAdapter());
         setFocusable(true);
         d = new Dimension(SPACE_WIDTH, SPACE_HEIGHT);
         setBackground(Color.white);
 
-        resetGameVariables();
         gameInit();
         setDoubleBuffered(true);
     }
 
-    //To support game restart, we must reset game stats
-    public void resetGameVariables() {
-    	deaths = 0;
-    	ingame = true;
-    	direction = -1;
-    	animator=null;
-    }
-    
     @Override
     public void addNotify() {
 
@@ -78,6 +69,7 @@ public class Space extends JPanel implements Runnable, Config {
     }
 
     public void gameInit() {
+
 
         invaders = new ArrayList<>();
 
@@ -91,6 +83,8 @@ public class Space extends JPanel implements Runnable, Config {
 
         player = new Player();
         shot = new Shot();
+
+
 
         if (animator == null || !ingame) {
 
@@ -230,6 +224,8 @@ public class Space extends JPanel implements Runnable, Config {
                         invader.setDying(true);
                         deaths++;
                         shot.die();
+                        player.addScore();
+                        SpaceInvaders.pframe.setTitle("Space Invader        Score:" + player.getScore());
                     }
                 }
             }
@@ -372,14 +368,6 @@ public class Space extends JPanel implements Runnable, Config {
         }
 
         gameOver();
-        try {
-			animator.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        animator = null;
-        
     }
 
     private class TAdapter extends KeyAdapter {

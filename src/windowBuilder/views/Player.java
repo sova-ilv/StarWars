@@ -11,10 +11,11 @@ public class Player extends Sprite implements Config {
     private final int START_Y = 280;
     private final int START_X = 270;
 
+
     //private final String playerImg = "src/windowBuilder/resources/player.png";
     private final String playerImg = "player.png";
     private int width;
-
+    int score = 0;
     public Player() {
 
         initPlayer();
@@ -24,7 +25,7 @@ public class Player extends Sprite implements Config {
         
         //ImageIcon ii = new ImageIcon(playerImg);
         //width = ii.getImage().getWidth(null);
-        
+
         Image ii = ResourceLoader.getImage(playerImg);
         width = ii.getWidth(null);
         setImage(ii);
@@ -75,5 +76,15 @@ public class Player extends Sprite implements Config {
         if (key == KeyEvent.VK_RIGHT) {        
             dx = 0;
         }
+    }
+    public int getScore(){
+        return score;
+
+    }
+    public void addScore(){
+        score++;
+    }
+    public void setScore(int i){
+        score = i;
     }
 }
