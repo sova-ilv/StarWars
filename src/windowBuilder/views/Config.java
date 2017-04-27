@@ -12,9 +12,8 @@ public interface Config {
 	    public static final int BORDER_LEFT = 5;
 	    public static final int GO_DOWN = 15;
 	    public static final int NUMBER_OF_ALIENS_TO_DESTROY = 24;
-	    public static final int CHANCE = 15; //lower this to 10 for enemies to deliver bombs.
-	    public static final int DELAY = 27;
+	    public static final int CHANCE = 13; //lower this to 13 for enemies to deliver bombs.
+	    public static final int DELAY = 25;
 	    public static final int PLAYER_WIDTH = 15;
 	    public static final int PLAYER_HEIGHT = 10;
-
 }
