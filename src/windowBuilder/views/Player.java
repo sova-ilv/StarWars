@@ -3,8 +3,8 @@ package windowBuilder.views;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 
+import windowBuilder.resources.ImagemProxy;
 
-import windowBuilder.resources.ResourceLoader;
 
 public class Player extends Sprite implements Config {
 
@@ -26,7 +26,8 @@ public class Player extends Sprite implements Config {
         //ImageIcon ii = new ImageIcon(playerImg);
         //width = ii.getImage().getWidth(null);
         
-        Image ii = ResourceLoader.getImage(playerImg);
+    	ImagemProxy imagemProxy = new ImagemProxy(playerImg);
+        Image ii = imagemProxy.carregarImagem(); 
         width = ii.getWidth(null);
         setImage(ii);
 

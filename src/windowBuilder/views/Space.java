@@ -21,7 +21,8 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
-import windowBuilder.resources.ResourceLoader;
+import windowBuilder.resources.ImagemProxy;
+
 
 public class Space extends JPanel implements Runnable, Config {
 
@@ -80,12 +81,17 @@ public class Space extends JPanel implements Runnable, Config {
     public void gameInit() {
 
         invaders = new ArrayList<>();
-
+        
+        Invader invader = new Invader();
+        
+        
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
-
-                Invader invader = new Invader(Invader_INIT_X + 18 * j, Invader_INIT_Y + 18 * i);
-                invaders.add(invader);
+            	Invader invaderAux = (Invader) invader.clone();
+                invaderAux.setX(Invader_INIT_X + 22 * j);
+                invaderAux.setY(Invader_INIT_Y + 22 * i);
+                invaderAux.initInvader();
+            	invaders.add(invaderAux);
             }
         }
 
@@ -221,10 +227,8 @@ public class Space extends JPanel implements Runnable, Config {
                             && shotX <= (InvaderX + INVADER_WIDTH)
                             && shotY >= (InvaderY)
                             && shotY <= (InvaderY + INVADER_HEIGHT)) {
-                        //ImageIcon ii = new ImageIcon(explImg);
-                        //invader.setImage(ii.getImage());
-                        
-                        Image ii = ResourceLoader.getImage(explImg);        
+                    	ImagemProxy imagemProxy = new ImagemProxy(explImg);
+                        Image ii = imagemProxy.carregarImagem(); ;        
                     	invader.setImage(ii);
                     	
                         invader.setDying(true);
@@ -325,9 +329,8 @@ public class Space extends JPanel implements Runnable, Config {
                         && bombX <= (playerX + PLAYER_WIDTH)
                         && bombY >= (playerY)
                         && bombY <= (playerY + PLAYER_HEIGHT)) {
-                    //ImageIcon ii = new ImageIcon(explImg);                	
-                    //player.setImage(ii.getImage());
-                	Image ii = ResourceLoader.getImage(explImg);        
+                	ImagemProxy imagemProxy = new ImagemProxy(explImg);
+                    Image ii = imagemProxy.carregarImagem();         
                 	player.setImage(ii);
                     
                     player.setDying(true);

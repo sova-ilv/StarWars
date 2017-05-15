@@ -2,27 +2,21 @@ package windowBuilder.views;
 
 import java.awt.Image;
 
-
-import windowBuilder.resources.ResourceLoader;
+import windowBuilder.resources.ImagemProxy;
 
 public class Invader extends Sprite {
 	private Bomb bomb;
-    //private final String alienImg = "src/windowBuilder/resources/alien_saucer2.jpg"; 
 	private final String alienImg = "alien_saucer2.jpg";
-    public Invader(int x, int y) {
+	 
+	public Invader(){
+		//initInvader();
+	}
 
-        initInvader(x, y);
-    }
+    public void initInvader() {         
 
-    private void initInvader(int x, int y) {
-
-        this.x = x;
-        this.y = y;
-
-        bomb = new Bomb(x, y);
-        //ImageIcon ii = new ImageIcon(alienImg); 
-        //setImage(ii.getImage());
-        Image ii = ResourceLoader.getImage(alienImg);        
+        bomb = new Bomb(this.x,this.y);
+        ImagemProxy imagemProxy = new ImagemProxy(alienImg);
+        Image ii = imagemProxy.carregarImagem();         
         setImage(ii);
     }
 
@@ -52,9 +46,8 @@ public class Invader extends Sprite {
             setDestroyed(true);
             this.x = x;
             this.y = y;
-            //ImageIcon ii = new ImageIcon(bombImg);
-            //setImage(ii.getImage());
-            Image ii = ResourceLoader.getImage(bombImg);
+            ImagemProxy imagemProxy = new ImagemProxy(bombImg);
+            Image ii = imagemProxy.carregarImagem(); 
             setImage(ii);
 
         }
