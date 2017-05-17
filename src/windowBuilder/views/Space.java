@@ -45,10 +45,13 @@ public class Space extends JPanel implements Runnable, Config {
     private String message = "You are dead!";
 
     private Thread animator;
+    private Context context;
 
     public Space() {
 
         initSpace();
+        this.context = new Context();
+        new InGameState().acao(context);
     }
 
     public void initSpace() {
@@ -98,7 +101,7 @@ public class Space extends JPanel implements Runnable, Config {
         player = new Player();
         shot = new Shot();
 
-        if (animator == null || !ingame) {
+        if (animator == null || !context.getState().state()) {
 
             animator = new Thread(this);
             animator.start();
