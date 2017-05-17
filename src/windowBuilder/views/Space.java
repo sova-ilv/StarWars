@@ -40,7 +40,6 @@ public class Space extends JPanel implements Runnable, Config {
     private int direction = -1;
     private int deaths = 0;
 
-    private boolean ingame = true;
     private final String explImg = "Explosion.jpeg";
     private String message = "You are dead!";
 
@@ -49,9 +48,10 @@ public class Space extends JPanel implements Runnable, Config {
 
     public Space() {
 
-        initSpace();
         this.context = new Context();
         new InGameState().acao(context);
+
+        initSpace();
     }
 
     public void initSpace() {
@@ -69,7 +69,7 @@ public class Space extends JPanel implements Runnable, Config {
     //To support game restart, we must reset game stats
     public void resetGameVariables() {
     	deaths = 0;
-    	ingame = true;
+    	new InGameState().acao(context);
     	direction = -1;
     	animator=null;
     }
@@ -135,7 +135,7 @@ public class Space extends JPanel implements Runnable, Config {
         if (player.isDying()) {
 
             player.die();
-            ingame = false;
+            new DeadState().acao(context);
         }
     }
 
@@ -168,7 +168,7 @@ public class Space extends JPanel implements Runnable, Config {
         g.fillRect(0, 0, d.width, d.height);
         g.setColor(Color.green);
 
-        if (ingame) {
+        if (context.getState().state()) {
 
             g.drawLine(0, GROUND, SPACE_WIDTH, GROUND);
             drawInvaders(g);
@@ -207,7 +207,7 @@ public class Space extends JPanel implements Runnable, Config {
 
         if (deaths == NUMBER_OF_ALIENS_TO_DESTROY) {
 
-            ingame = false;
+            new DeadState().acao(context);
             message = "Game won!";
         }
 
@@ -298,7 +298,7 @@ public class Space extends JPanel implements Runnable, Config {
                 int y = Invader.getY();
 
                 if (y > GROUND - INVADER_HEIGHT) {
-                    ingame = false;
+                    new DeadState().acao(context);
                     message = "Invasion!";
                 }
 
@@ -359,12 +359,12 @@ public class Space extends JPanel implements Runnable, Config {
 
         beforeTime = System.currentTimeMillis();
 
-        while (ingame) {
+        while (context.getState().state()) {
 
             repaint();
             animationCycle();
             
-
+            
             timeDiff = System.currentTimeMillis() - beforeTime;
             sleep = DELAY - timeDiff;
 
@@ -412,7 +412,7 @@ public class Space extends JPanel implements Runnable, Config {
 
             if (key == KeyEvent.VK_SPACE) {
                 
-                if (ingame) {
+                if (context.getState().state()) {
                     if (!shot.isVisible()) {
                         shot = new Shot(x, y);
                     }
