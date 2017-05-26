@@ -1,15 +1,12 @@
 /*
  * SpaceInvader.java
  * - Version 4/13/2017 - compiles and actually run with basic features. (JV)
- * - Version 4/21/2017 - Added Menubar to contain upcoming features.
+ * - Version 4/21/2017 - Added menubar to contain upcoming features.
  *                     - Completed the game restart feature.
  * 
- * Here are the wish list on my initial requirements
- * 1. Restart button - Done 4-21-17 
- * 2. Stats status => how many lives left, how many enemies left
- * 3. colors are boring, please update
- * 4. Icons are boring, please update
- * 5. Config may not be enough.
+ * - Version 4/24/2017 - Configuration update
+ * - Version 4/25/2017 - Updated Explosion image
+ * - Version 4/27/2017 - Updated for player score data
  * 
  * */
 
