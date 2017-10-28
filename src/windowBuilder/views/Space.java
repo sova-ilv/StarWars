@@ -21,7 +21,8 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
-import windowBuilder.resources.ResourceLoader;
+import windowBuilder.resources.ImagemProxy;
+
 
 public class Space extends JPanel implements Runnable, Config {
 
@@ -39,13 +40,16 @@ public class Space extends JPanel implements Runnable, Config {
     private int direction = -1;
     private int deaths = 0;
 
-    private boolean ingame = true;
     private final String explImg = "Explosion.jpeg";
     private String message = "You are dead!";
 
     private Thread animator;
+    private Context context;
 
     public Space() {
+
+        this.context = new Context();
+        new InGameState().acao(context);
 
         initSpace();
     }
@@ -65,7 +69,7 @@ public class Space extends JPanel implements Runnable, Config {
     //To support game restart, we must reset game stats
     public void resetGameVariables() {
     	deaths = 0;
-    	ingame = true;
+    	new InGameState().acao(context);
     	direction = -1;
     	animator=null;
     }
@@ -80,19 +84,24 @@ public class Space extends JPanel implements Runnable, Config {
     public void gameInit() {
 
         invaders = new ArrayList<>();
-
+        
+        Invader invader = new Invader();
+        
+        
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
-
-                Invader invader = new Invader(Invader_INIT_X + 18 * j, Invader_INIT_Y + 18 * i);
-                invaders.add(invader);
+            	Invader invaderAux = (Invader) invader.clone();
+                invaderAux.setX(Invader_INIT_X + 22 * j);
+                invaderAux.setY(Invader_INIT_Y + 22 * i);
+                invaderAux.initInvader();
+            	invaders.add(invaderAux);
             }
         }
 
         player = new Player();
         shot = new Shot();
 
-        if (animator == null || !ingame) {
+        if (animator == null || !context.getState().state()) {
 
             animator = new Thread(this);
             animator.start();
@@ -126,7 +135,7 @@ public class Space extends JPanel implements Runnable, Config {
         if (player.isDying()) {
 
             player.die();
-            ingame = false;
+            new DeadState().acao(context);
         }
     }
 
@@ -159,7 +168,7 @@ public class Space extends JPanel implements Runnable, Config {
         g.fillRect(0, 0, d.width, d.height);
         g.setColor(Color.green);
 
-        if (ingame) {
+        if (context.getState().state()) {
 
             g.drawLine(0, GROUND, SPACE_WIDTH, GROUND);
             drawInvaders(g);
@@ -198,7 +207,7 @@ public class Space extends JPanel implements Runnable, Config {
 
         if (deaths == NUMBER_OF_ALIENS_TO_DESTROY) {
 
-            ingame = false;
+            new DeadState().acao(context);
             message = "Game won!";
         }
 
@@ -221,10 +230,8 @@ public class Space extends JPanel implements Runnable, Config {
                             && shotX <= (InvaderX + INVADER_WIDTH)
                             && shotY >= (InvaderY)
                             && shotY <= (InvaderY + INVADER_HEIGHT)) {
-                        //ImageIcon ii = new ImageIcon(explImg);
-                        //invader.setImage(ii.getImage());
-                        
-                        Image ii = ResourceLoader.getImage(explImg);        
+                    	ImagemProxy imagemProxy = new ImagemProxy(explImg);
+                        Image ii = imagemProxy.carregarImagem(); ;        
                     	invader.setImage(ii);
                     	
                         invader.setDying(true);
@@ -291,7 +298,7 @@ public class Space extends JPanel implements Runnable, Config {
                 int y = Invader.getY();
 
                 if (y > GROUND - INVADER_HEIGHT) {
-                    ingame = false;
+                    new DeadState().acao(context);
                     message = "Invasion!";
                 }
 
@@ -325,9 +332,8 @@ public class Space extends JPanel implements Runnable, Config {
                         && bombX <= (playerX + PLAYER_WIDTH)
                         && bombY >= (playerY)
                         && bombY <= (playerY + PLAYER_HEIGHT)) {
-                    //ImageIcon ii = new ImageIcon(explImg);                	
-                    //player.setImage(ii.getImage());
-                	Image ii = ResourceLoader.getImage(explImg);        
+                	ImagemProxy imagemProxy = new ImagemProxy(explImg);
+                    Image ii = imagemProxy.carregarImagem();         
                 	player.setImage(ii);
                     
                     player.setDying(true);
@@ -353,12 +359,12 @@ public class Space extends JPanel implements Runnable, Config {
 
         beforeTime = System.currentTimeMillis();
 
-        while (ingame) {
+        while (context.getState().state()) {
 
             repaint();
             animationCycle();
             
-
+            
             timeDiff = System.currentTimeMillis() - beforeTime;
             sleep = DELAY - timeDiff;
 
@@ -406,7 +412,7 @@ public class Space extends JPanel implements Runnable, Config {
 
             if (key == KeyEvent.VK_SPACE) {
                 
-                if (ingame) {
+                if (context.getState().state()) {
                     if (!shot.isVisible()) {
                         shot = new Shot(x, y);
                     }

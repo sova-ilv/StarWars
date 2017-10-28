@@ -3,7 +3,7 @@ package windowBuilder.views;
 import java.awt.Image;
 
 
-public class Sprite {
+public abstract class Sprite implements Cloneable {
 
 	    private boolean visible;
 	    private Image image;
@@ -12,6 +12,19 @@ public class Sprite {
 	    protected int y;
 	    protected boolean dying;
 	    protected int dx;
+	    
+	    public Object clone() {
+	        Object clone = null;
+	        
+	        try {
+	           clone = super.clone();
+	           
+	        } catch (CloneNotSupportedException e) {
+	           e.printStackTrace();
+	        }
+	        
+	        return clone;
+	  }
 
 	    public Sprite() {
 	    

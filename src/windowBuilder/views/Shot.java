@@ -2,8 +2,7 @@ package windowBuilder.views;
 
 import java.awt.Image;
 
-
-import windowBuilder.resources.ResourceLoader;
+import windowBuilder.resources.ImagemProxy;
 
 public class Shot extends Sprite {
 
@@ -25,7 +24,8 @@ public class Shot extends Sprite {
         //ImageIcon ii = new ImageIcon(shotImg);
         //setImage(ii.getImage());
 
-        Image ii = ResourceLoader.getImage(shotImg);
+    	ImagemProxy imagemProxy = new ImagemProxy(shotImg);
+        Image ii = imagemProxy.carregarImagem();  
         setImage(ii);
         
         setX(x + H_SPACE);

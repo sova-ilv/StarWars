@@ -3,8 +3,8 @@ package windowBuilder.views;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 
+import windowBuilder.resources.ImagemProxy;
 
-import windowBuilder.resources.ResourceLoader;
 
 public class Player extends Sprite implements Config {
 
@@ -23,21 +23,15 @@ public class Player extends Sprite implements Config {
 
     private void initPlayer() {
         
-        //ImageIcon ii = new ImageIcon(playerImg);
-        //width = ii.getImage().getWidth(null);
-        
-        Image ii = ResourceLoader.getImage(playerImg);
+    	ImagemProxy imagemProxy = new ImagemProxy(playerImg);
+        Image ii = imagemProxy.carregarImagem(); 
         width = ii.getWidth(null);
         setImage(ii);
 
-        //setImage(ii.getImage());
         setX(START_X);
         setY(START_Y);
     }
-
-    //x and y are instance variables inherited from Sprite.
     
-    //move is horizontal only using the left or right arrow keys    
     public void move() {
         
         x += dx;
@@ -51,7 +45,7 @@ public class Player extends Sprite implements Config {
         }
     }
 
-    //When I get a left or right arrow keys pressed
+    
     public void keyPressed(KeyEvent e) {
         
         int key = e.getKeyCode();

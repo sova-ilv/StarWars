@@ -111,7 +111,7 @@ public class SpaceInvaders extends JFrame implements Config{
 	
 	public void setupMenuBar () {
 		JMenuBar menuBar;
-		JMenu menu; //, submenu;
+		JMenu menu; // submenu;
 		JMenuItem menuItem;
 		
 		 
